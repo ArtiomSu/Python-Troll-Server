@@ -1,0 +1,5 @@
+flask
+pyautogui
+gTTS
+playsound
+logging
