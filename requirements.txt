@@ -2,4 +2,5 @@ flask
 pyautogui
 gTTS
 playsound
-logging
+numpy
+opencv-python

