@@ -11,6 +11,7 @@ from playsound import playsound
 import socket
 import numpy as np 
 import cv2 
+pyautogui.FAILSAFE = False
 
 #config
 hide_self = True

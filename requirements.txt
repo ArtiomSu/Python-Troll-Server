@@ -4,3 +4,4 @@ gTTS
 playsound
 numpy
 opencv-python
+pillow
