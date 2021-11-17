@@ -5,3 +5,4 @@ playsound
 numpy
 opencv-python
 pillow
+pyinstaller
